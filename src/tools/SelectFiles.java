@@ -16,7 +16,6 @@ public class SelectFiles {
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.setMultiSelectionEnabled(true);
 		fileChooser.setDialogTitle("Select Files to Convert");
-		fileChooser.showOpenDialog(null);
 		
 		if(fileChooser.showOpenDialog(open) == JFileChooser.APPROVE_OPTION){
 			files = fileChooser.getSelectedFiles();
