@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import ui.Main;
 
 public class IOStream {
 	
@@ -29,7 +28,7 @@ public class IOStream {
 					System.out.println("read "+readNum +" bytes,");
 				}
 			} catch (IOException e){
-				Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, e);
+				Logger.getLogger(IOStream.class.getName()).log(Level.SEVERE, null, e);
 			}
 			
 			//implement WrapperRemover.java
