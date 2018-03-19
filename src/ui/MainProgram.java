@@ -17,8 +17,6 @@ import javax.swing.JScrollPane;
 public class MainProgram {
 
 	private JFrame frame;
-	private JTextField textField;
-	private JTextField txtE;
 
 	/**
 	 * Launch the application.
@@ -41,67 +39,67 @@ public class MainProgram {
 	 */
 	public MainProgram() {
 		initialize();
+		UICreator();
+		ButtonCreator();
+	}
+	/**
+	 * Initialize the contents of the frame
+	 * then the UI and the buttons.
+	 */
+	
+	private void ButtonCreator(){
+		JButton btn_browse = new JButton("Browse Files");
+		btn_browse.setBounds(10, 115, 158, 23);
+		frame.getContentPane().add(btn_browse);
+		
+		JButton btn_convert = new JButton("Convert");
+		btn_convert.setBounds(10, 272, 158, 23);
+		frame.getContentPane().add(btn_convert);
+		
+		JButton btn_exit = new JButton("Exit ");
+		btn_exit.setBounds(465, 435, 89, 23);
+		frame.getContentPane().add(btn_exit);
+		
+	}
+	
+	private void UICreator(){
+		JLabel lbl_title = new JLabel("SS to JPG Converter");
+		lbl_title.setBounds(10, 11, 228, 14);
+		frame.getContentPane().add(lbl_title);	
+	
+		JLabel lbl_outputDir = new JLabel("Save to.. ");
+		lbl_outputDir.setBounds(10, 218, 158, 14);
+		frame.getContentPane().add(lbl_outputDir);
+		
+		JLabel lbl_status = new JLabel("Status");
+		lbl_status.setBounds(10, 306, 46, 14);
+		frame.getContentPane().add(lbl_status);
+		
+		JTextField txt_outputDir = new JTextField();
+		txt_outputDir.setColumns(10);
+		txt_outputDir.setBounds(10, 238, 456, 23);
+		frame.getContentPane().add(txt_outputDir);
+		
+		JTextArea instructions = new JTextArea();
+		instructions.setText("1. Select files and output directory. \r\n2. Click Convert. \r\n3. Done. ");
+		instructions.setBounds(10, 36, 308, 63);
+		frame.getContentPane().add(instructions);
+		//instructions
+		
+		JTextArea txt_log = new JTextArea();
+		txt_log.setBounds(10, 331, 544, 93);
+		frame.getContentPane().add(txt_log);
+	
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
+	private void ActionListener(){
+		
+	}
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 580, 520);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel label = new JLabel("SS to JPG Converter");
-		label.setBounds(10, 11, 228, 14);
-		frame.getContentPane().add(label);
-		
-		JTextArea textArea = new JTextArea();
-		textArea.setText("1. Select files and output directory. \r\n2. Click Convert. \r\n3. Done. ");
-		textArea.setBounds(10, 36, 308, 63);
-		frame.getContentPane().add(textArea);
-		
-		JButton button = new JButton("Browse Files");
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				SelectFiles selectFiles = new SelectFiles();
-				selectFiles.selectFiles();
-			}
-		});
-		button.setBounds(10, 115, 158, 23);
-		frame.getContentPane().add(button);
-		
-		JLabel label_1 = new JLabel("Save to.. ");
-		label_1.setBounds(10, 218, 158, 14);
-		frame.getContentPane().add(label_1);
-		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(10, 238, 456, 23);
-		frame.getContentPane().add(textField);
-		
-		JButton button_1 = new JButton("Convert");
-		button_1.setBounds(10, 272, 158, 23);
-		frame.getContentPane().add(button_1);
-		
-		JLabel label_2 = new JLabel("Status");
-		label_2.setBounds(10, 306, 46, 14);
-		frame.getContentPane().add(label_2);
-		
-		JTextArea textArea_1 = new JTextArea();
-		textArea_1.setBounds(10, 331, 544, 93);
-		frame.getContentPane().add(textArea_1);
-		
-		JButton button_2 = new JButton("Exit ");
-		button_2.setBounds(465, 435, 89, 23);
-		frame.getContentPane().add(button_2);
-		
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(10, 149, 308, 58);
-		frame.getContentPane().add(scrollPane_1);
-		
-		txtE = new JTextField();
-		scrollPane_1.setViewportView(txtE);
-		txtE.setColumns(10);
 	}
 }
