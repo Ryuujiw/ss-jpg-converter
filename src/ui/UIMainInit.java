@@ -3,6 +3,7 @@ package ui;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -35,8 +36,16 @@ public class UIMainInit implements ActionListener {
 	public void informationPanelCreator(JFrame frame){
 		JPanel informationPanel = new JPanel();
 		
-		JLabel test = new JLabel("Diamonds");
-		informationPanel.add(test);
+		JLabel lbl_title = new JLabel(".ss to .jpg image converter.");
+		lbl_title.setPreferredSize(new Dimension(400, 30));
+		
+		JTextArea txt_instructions = new JTextArea();
+		txt_instructions.setText("1. Select files and output directory. \r\n2. Click Convert. \r\n3. Done. ");
+		txt_instructions.setPreferredSize(new Dimension(400, 90));
+		txt_instructions.setEditable(false);
+		
+		informationPanel.add(lbl_title);
+		informationPanel.add(txt_instructions);
 		
 		frame.add(informationPanel, BorderLayout.NORTH);
 	}
