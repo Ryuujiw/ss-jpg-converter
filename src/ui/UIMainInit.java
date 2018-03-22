@@ -11,13 +11,12 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.SwingUtilities;
 
-
+import main.ButtonListeners;
 
 public class UIMainInit {
 
-	private JButton btn_browse, btn_convert;
+	private JButton btn_browse, btn_convert, btn_exit;
 	private JTextArea txt_files;
 	private JScrollPane scrollFiles;
 	//jtextfield for output directory yet to be added. 
@@ -27,6 +26,7 @@ public class UIMainInit {
 		informationPanelCreator(frame);
 		fileSystemPanelCreator(frame);
 		consoleLogPanelCreator(frame);
+		ButtonListeners btnListen = new ButtonListeners(btn_browse, btn_convert, btn_exit, txt_files);
 	}
 	
 	public JFrame initialize(){
@@ -45,9 +45,8 @@ public class UIMainInit {
 		JLabel lbl_title = new JLabel(".ss to .jpg image converter.");
 		lbl_title.setPreferredSize(new Dimension(400, 30));
 		
-		JTextArea txt_instructions = new JTextArea();
+		JTextArea txt_instructions = new JTextArea(5, 40);
 		txt_instructions.setText("1. Select files and output directory. \r\n2. Click Convert. \r\n3. Done. ");
-		txt_instructions.setPreferredSize(new Dimension(400, 90));
 		txt_instructions.setEditable(false);
 		
 		informationPanel.add(lbl_title);
@@ -64,7 +63,7 @@ public class UIMainInit {
 		btn_browse.setPreferredSize(new Dimension(100, 25));
 //		btn_browse.addActionListener(this);
 		
-		txt_files = new JTextArea(7,35);
+		txt_files = new JTextArea(7,40);
 		txt_files.setEditable(false);
 		
 		scrollFiles = new JScrollPane(txt_files);
@@ -83,18 +82,31 @@ public class UIMainInit {
 	public void consoleLogPanelCreator(JFrame frame){
 		JPanel consoleLogPanel = new JPanel();
 		
-		JLabel test = new JLabel("Log");
-		consoleLogPanel.add(test);
+		btn_exit = new JButton("Exit");
+		btn_exit.setPreferredSize(new Dimension(100, 25));
+		
+		consoleLogPanel.add(btn_exit);
 		
 		frame.add(consoleLogPanel, BorderLayout.SOUTH);
 	}
+
+	public JButton getBtn_browse() {
+		return btn_browse;
+	}
+
+	public void setBtn_browse(JButton btn_browse) {
+		this.btn_browse = btn_browse;
+	}
+
+	public JButton getBtn_convert() {
+		return btn_convert;
+	}
+
+	public JButton getBtn_exit() {
+		return btn_exit;
+	}
 	
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable(){
-			@Override
-			public void run(){
-				new UIMainInit();
-			}
-		});
+	public JTextArea getTxt_files() {
+		return txt_files;
 	}
 }

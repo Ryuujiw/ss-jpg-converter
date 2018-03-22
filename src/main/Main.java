@@ -1,12 +1,19 @@
 package main;
 
+import javax.swing.SwingUtilities;
+
 import ui.UIMainInit;
 
 public class Main {
-
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		UIMainInit init = new UIMainInit();
+		SwingUtilities.invokeLater(new Runnable(){
+			@Override
+			public void run(){
+				new UIMainInit();
+			}
+		}); //initiates the UI. 	
 	}
 
 }
