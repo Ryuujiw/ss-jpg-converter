@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,10 +16,9 @@ import logic.WrapperRemover;
 public class IOStream {
 	
 	private WrapperRemover wr;
-	private ImageProcessing ip;
-	private Image img; 
+	private ArrayList<byte[]> imagesRaw = new ArrayList<byte[]>();
 	
-	public ByteArrayOutputStream filterBytes(File[] files) throws IOException{
+	public ArrayList<byte[]> filterBytes(File[] files) throws IOException{
 		
 		ByteArrayOutputStream bos = null;
 		
@@ -37,14 +37,12 @@ public class IOStream {
 			} catch (IOException e){
 				Logger.getLogger(IOStream.class.getName()).log(Level.SEVERE, null, e);
 			}
-			//implement WrapperRemover.java
-			wr = new WrapperRemover(buf, 36, 130);
-			img = ip.convertBytesToImage(wr.removeWrapper());
-			ip.writeOutput(img, ""); //write output
-			
+			//add into an arraylist which will then be passed into main for image processing to work.
+			buf = wr.removeWrapper();
+			imagesRaw.add(buf);
 		}
 		
-		return bos;
+		return imagesRaw;
 		
 	}
 }
