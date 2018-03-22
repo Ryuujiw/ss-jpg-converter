@@ -1,5 +1,6 @@
 package tools;
 
+import java.awt.Image;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -8,10 +9,16 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import logic.WrapperRemover;
+
 
 public class IOStream {
 	
-	public ByteArrayOutputStream filterBytes(File[] files) throws FileNotFoundException{
+	private WrapperRemover wr;
+	private ImageProcessing ip;
+	private Image img; 
+	
+	public ByteArrayOutputStream filterBytes(File[] files) throws IOException{
 		
 		ByteArrayOutputStream bos = null;
 		
@@ -30,8 +37,10 @@ public class IOStream {
 			} catch (IOException e){
 				Logger.getLogger(IOStream.class.getName()).log(Level.SEVERE, null, e);
 			}
-			
 			//implement WrapperRemover.java
+			wr = new WrapperRemover(buf, 36, 130);
+			img = ip.convertBytesToImage(wr.removeWrapper());
+			ip.writeOutput(img, ""); //write output
 			
 		}
 		

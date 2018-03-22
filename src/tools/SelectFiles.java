@@ -4,10 +4,12 @@ import java.io.File;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 public class SelectFiles {
 	
-	public File[] selectFiles(){
+	public File[] selectFiles(JTextArea txt_files){
 		
 		File[] files = null;
 		
@@ -19,6 +21,10 @@ public class SelectFiles {
 		
 		if(fileChooser.showOpenDialog(open) == JFileChooser.APPROVE_OPTION){
 			files = fileChooser.getSelectedFiles();
+			
+			for(File f: files){
+				txt_files.append(f.getName() + "\n");
+			}
 		}
 		
 		return files;
