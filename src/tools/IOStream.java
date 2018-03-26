@@ -12,7 +12,7 @@ import logic.WrapperRemover;
 
 public class IOStream {
 	
-	private WrapperRemover wr;
+	private WrapperRemover wr = new WrapperRemover(36, 130);
 	private ArrayList<byte[]> imagesRaw = new ArrayList<byte[]>();
 	
 	public ArrayList<byte[]> filterBytes(File[] files) throws IOException{
@@ -35,7 +35,8 @@ public class IOStream {
 				Logger.getLogger(IOStream.class.getName()).log(Level.SEVERE, null, e);
 			}
 			//add into an arraylist which will then be passed into main for image processing to work.
-			buf = wr.removeWrapper();
+			buf = bos.toByteArray();
+			buf = wr.removeWrapper(buf);
 			imagesRaw.add(buf);
 		}
 		

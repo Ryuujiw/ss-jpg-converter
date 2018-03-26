@@ -10,23 +10,24 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 
 import main.ButtonListeners;
 
 public class UIMainInit {
 
-	private JButton btn_browse, btn_convert, btn_exit;
+	private JButton btn_browse, btn_convert, btn_exit, btn_chooseDir;
 	private JTextArea txt_files;
 	private JScrollPane scrollFiles;
-	//jtextfield for output directory yet to be added. 
+	private JTextField txt_outputDir;
 	
 	public UIMainInit(){
 		JFrame frame = initialize();
 		informationPanelCreator(frame);
 		fileSystemPanelCreator(frame);
 		consoleLogPanelCreator(frame);
-		ButtonListeners btnListen = new ButtonListeners(btn_browse, btn_convert, btn_exit, txt_files);
+		ButtonListeners btnListen = new ButtonListeners(btn_browse, btn_convert, btn_exit, btn_chooseDir, txt_files, txt_outputDir);
 	}
 	
 	public JFrame initialize(){
@@ -61,19 +62,25 @@ public class UIMainInit {
 		
 		btn_browse = new JButton("Browse");
 		btn_browse.setPreferredSize(new Dimension(100, 25));
-//		btn_browse.addActionListener(this);
 		
 		txt_files = new JTextArea(7,40);
 		txt_files.setEditable(false);
 		
 		scrollFiles = new JScrollPane(txt_files);
 		scrollFiles.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollFiles.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		
+		txt_outputDir = new JTextField(29);
+		txt_outputDir.setEditable(false);
+		
+		btn_chooseDir = new JButton("...");
 		
 		btn_convert = new JButton("Convert");
-//		btn_convert.addActionListener(this);
 		
 		fileSystemPanel.add(btn_browse);
 		fileSystemPanel.add(scrollFiles);
+		fileSystemPanel.add(txt_outputDir);
+		fileSystemPanel.add(btn_chooseDir);
 		fileSystemPanel.add(btn_convert);
 		
 		frame.add(fileSystemPanel, BorderLayout.CENTER);
@@ -106,7 +113,15 @@ public class UIMainInit {
 		return btn_exit;
 	}
 	
+	public JButton getBtn_chooseDir(){
+		return btn_chooseDir;
+	}
+	
 	public JTextArea getTxt_files() {
 		return txt_files;
+	}
+	
+	public JTextField getTxt_outputDir(){
+		return txt_outputDir;
 	}
 }

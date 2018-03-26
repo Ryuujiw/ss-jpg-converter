@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 import tools.IOStream;
 import tools.ImageProcessing;
@@ -16,24 +17,34 @@ import tools.SelectFiles;
 
 public class ButtonListeners implements ActionListener {
 	
-	private JButton btn_browse, btn_convert, btn_exit;
+	private JButton btn_browse, btn_convert, btn_exit, btn_chooseDir;
 	private File[] files;
 	private JTextArea txt_files;
+	private JTextField txt_outputDir;
 	private SelectFiles sf;
 	private IOStream ios;
-	private ImageProcessing ip;
+	private ImageProcessing ip = new ImageProcessing();
 	private ArrayList<byte[]> imagesRaw;
 	private ArrayList<Image> imagesProcessed;
+	private String outputDirectory;
 	
-	public ButtonListeners(JButton btn_browse, JButton btn_convert, JButton btn_exit, JTextArea txt_files){
+	public ButtonListeners(JButton btn_browse, 
+						   JButton btn_convert, 
+						   JButton btn_exit, 
+						   JButton btn_chooseDir, 
+						   JTextArea txt_files, 
+						   JTextField txt_outputDir){
 		this.btn_browse = btn_browse;
 		this.btn_convert = btn_convert;
 		this.btn_exit = btn_exit;
+		this.btn_chooseDir = btn_chooseDir;
 		this.txt_files = txt_files;
+		this.txt_outputDir = txt_outputDir;
 		
 		btn_browse.addActionListener(this);
 		btn_convert.addActionListener(this);
 		btn_exit.addActionListener(this);
+		btn_chooseDir.addActionListener(this);
 		
 		sf = new SelectFiles();
 		ios = new IOStream();
@@ -55,11 +66,23 @@ public class ButtonListeners implements ActionListener {
 			try {
 				imagesRaw = ios.filterBytes(files);
 				imagesProcessed = ip.convertBytesToImage(imagesRaw);
+				//output to dir
+				
+				for(File f: files){
+					ip.writeOutput(imagesProcessed, outputDirectory + "\\" + f.getName().replaceFirst("[.][^.]+$", ".jpg"));
+					
+				}
 				
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+			
+		} else if(obj == btn_exit){
+			System.exit(0);
+			
+		} else if(obj == btn_chooseDir){
+			outputDirectory = sf.chooseOutputDirectory(txt_outputDir);
 			
 		}
 	}
