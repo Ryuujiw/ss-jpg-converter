@@ -90,7 +90,7 @@ public class ButtonListeners implements ActionListener {
 		}
 	}
 	
-	public void clear(){
+	public void clearMemory(){
 		files = null;
 		imagesRaw = null;
 		imagesProcessed = null;
