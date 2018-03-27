@@ -18,8 +18,8 @@ import main.ButtonListeners;
 public class UIMainInit {
 
 	private JButton btn_browse, btn_convert, btn_exit, btn_chooseDir;
-	private JTextArea txt_files;
-	private JScrollPane scrollFiles;
+	private JTextArea txt_files, txt_consoleLog;
+	private JScrollPane scrollFiles, scrollConsole;
 	private JTextField txt_outputDir;
 	
 	public UIMainInit(){
@@ -27,7 +27,7 @@ public class UIMainInit {
 		informationPanelCreator(frame);
 		fileSystemPanelCreator(frame);
 		consoleLogPanelCreator(frame);
-		ButtonListeners btnListen = new ButtonListeners(btn_browse, btn_convert, btn_exit, btn_chooseDir, txt_files, txt_outputDir);
+		ButtonListeners btnListen = new ButtonListeners(btn_browse, btn_convert, btn_exit, btn_chooseDir, txt_files, txt_consoleLog, txt_outputDir);
 	}
 	
 	public JFrame initialize(){
@@ -76,12 +76,19 @@ public class UIMainInit {
 		btn_chooseDir = new JButton("...");
 		
 		btn_convert = new JButton("Convert");
+
+		txt_consoleLog = new JTextArea(7,40);
+		txt_consoleLog.setEditable(false);
+		
+		scrollConsole = new JScrollPane(txt_consoleLog);
+		scrollConsole.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		
 		fileSystemPanel.add(btn_browse);
 		fileSystemPanel.add(scrollFiles);
 		fileSystemPanel.add(txt_outputDir);
 		fileSystemPanel.add(btn_chooseDir);
 		fileSystemPanel.add(btn_convert);
+		fileSystemPanel.add(scrollConsole);
 		
 		frame.add(fileSystemPanel, BorderLayout.CENTER);
 	}

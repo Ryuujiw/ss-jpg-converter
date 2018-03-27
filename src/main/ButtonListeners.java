@@ -19,7 +19,7 @@ public class ButtonListeners implements ActionListener {
 	
 	private JButton btn_browse, btn_convert, btn_exit, btn_chooseDir;
 	private File[] files;
-	private JTextArea txt_files;
+	private JTextArea txt_files, txt_consoleLog;
 	private JTextField txt_outputDir;
 	private SelectFiles sf;
 	private IOStream ios;
@@ -33,12 +33,14 @@ public class ButtonListeners implements ActionListener {
 						   JButton btn_exit, 
 						   JButton btn_chooseDir, 
 						   JTextArea txt_files, 
+						   JTextArea txt_consoleLog,
 						   JTextField txt_outputDir){
 		this.btn_browse = btn_browse;
 		this.btn_convert = btn_convert;
 		this.btn_exit = btn_exit;
 		this.btn_chooseDir = btn_chooseDir;
 		this.txt_files = txt_files;
+		this.txt_consoleLog = txt_consoleLog;
 		this.txt_outputDir = txt_outputDir;
 		
 		btn_browse.addActionListener(this);
@@ -61,6 +63,7 @@ public class ButtonListeners implements ActionListener {
 			
 			files = sf.selectFiles(txt_files);
 			
+			
 		} else if(obj == btn_convert){
 			
 			try {
@@ -68,10 +71,7 @@ public class ButtonListeners implements ActionListener {
 				imagesProcessed = ip.convertBytesToImage(imagesRaw);
 				//output to dir
 				
-				for(File f: files){
-					ip.writeOutput(imagesProcessed, outputDirectory + "\\" + f.getName().replaceFirst("[.][^.]+$", ".jpg"));
-					
-				}
+				ip.writeOutput(imagesProcessed, outputDirectory, files, txt_consoleLog);
 				
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block

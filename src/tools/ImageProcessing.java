@@ -13,6 +13,7 @@ import javax.imageio.ImageIO;
 import javax.imageio.ImageReadParam;
 import javax.imageio.ImageReader;
 import javax.imageio.stream.ImageInputStream;
+import javax.swing.JTextArea;
 
 public class ImageProcessing {
 	
@@ -37,19 +38,24 @@ public class ImageProcessing {
 		return imageProcessed;
 	} //converts bytes to image 
 	
-	public void writeOutput(ArrayList<Image> imageProcessed, String outputDirectory) throws IOException{
+	public void writeOutput(ArrayList<Image> imageProcessed, String outputDirectory, File[] files, JTextArea txt_consoleLog) throws IOException{
+		
+		int index = 0;
 		
 		for(Image ip: imageProcessed){
+			
 			//bufferedImage is the RenderedImage to be written
 			BufferedImage bufferedImage = new BufferedImage(ip.getWidth(null), ip.getHeight(null), BufferedImage.TYPE_INT_RGB);
 		
 			Graphics2D g2 = bufferedImage.createGraphics();
 			g2.drawImage(ip, null, null);
 			
-			File imageFile = new File(outputDirectory);
+		
+			File imageFile = new File(outputDirectory + "\\"+ files[index].getName()+".jpg");
 			ImageIO.write(bufferedImage, "jpg", imageFile);
 			
-			System.out.println(imageFile.getPath());			
+			txt_consoleLog.append(imageFile.getPath()+"\n");
+			index ++;
 		}
 	}
 }
