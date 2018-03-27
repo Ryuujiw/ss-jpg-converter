@@ -103,32 +103,4 @@ public class UIMainInit {
 		
 		frame.add(consoleLogPanel, BorderLayout.SOUTH);
 	}
-
-	public JButton getBtn_browse() {
-		return btn_browse;
-	}
-
-	public void setBtn_browse(JButton btn_browse) {
-		this.btn_browse = btn_browse;
-	}
-
-	public JButton getBtn_convert() {
-		return btn_convert;
-	}
-
-	public JButton getBtn_exit() {
-		return btn_exit;
-	}
-	
-	public JButton getBtn_chooseDir(){
-		return btn_chooseDir;
-	}
-	
-	public JTextArea getTxt_files() {
-		return txt_files;
-	}
-	
-	public JTextField getTxt_outputDir(){
-		return txt_outputDir;
-	}
 }

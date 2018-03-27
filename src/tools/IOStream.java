@@ -38,8 +38,12 @@ public class IOStream {
 			buf = bos.toByteArray();
 			buf = wr.removeWrapper(buf);
 			imagesRaw.add(buf);
+			
+			fis = null;
+			bos = null;
+			buf = null;
 		}
-		
+		wr = null;
 		return imagesRaw;
 		
 	}

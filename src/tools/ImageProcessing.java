@@ -1,5 +1,6 @@
 package tools;
 
+import java.awt.Desktop;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -34,12 +35,18 @@ public class ImageProcessing {
 	        Image image = reader.read(0, param); //got an image file
 	        
 	        imageProcessed.add(image);
+	        
+	        reader = null;
+	        source = null;
+	        iis = null;
+	        param = null;
+	        image = null;
 		}
 		return imageProcessed;
 	} //converts bytes to image 
 	
 	public void writeOutput(ArrayList<Image> imageProcessed, String outputDirectory, File[] files, JTextArea txt_consoleLog) throws IOException{
-		
+		//I should use a hashmap arrayList with File[] maybe.
 		int index = 0;
 		
 		for(Image ip: imageProcessed){
@@ -54,8 +61,13 @@ public class ImageProcessing {
 			File imageFile = new File(outputDirectory + "\\"+ files[index].getName()+".jpg");
 			ImageIO.write(bufferedImage, "jpg", imageFile);
 			
-			txt_consoleLog.append(imageFile.getPath()+"\n");
-			index ++;
+			txt_consoleLog.append(imageFile.getPath()+" created.\n");
+			index ++; 
+			bufferedImage = null;
+			g2 = null;
+			imageFile=  null;
 		}
+		
+		Desktop.getDesktop().open(new File(outputDirectory));
 	}
 }

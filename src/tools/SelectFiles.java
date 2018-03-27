@@ -10,13 +10,14 @@ import javax.swing.JTextField;
 
 public class SelectFiles {
 	
+	private JFileChooser fileChooser;
+	private JButton open = new JButton();
 	public File[] selectFiles(JTextArea txt_files){
 		
 		File[] files = null;
 		
-		JButton open = new JButton();
+		fileChooser = new JFileChooser();
 		
-		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.setMultiSelectionEnabled(true);
 		fileChooser.setDialogTitle("Select Files to Convert");
 		
@@ -28,15 +29,17 @@ public class SelectFiles {
 			}
 		}
 		
+		fileChooser = null;
+		
 		return files;
 	}
 	
 	public String chooseOutputDirectory(JTextField txt_outputDir){
 		
-		JButton open = new JButton();
 		String outputDir = "";
 		
-		JFileChooser fileChooser = new JFileChooser();
+		fileChooser = new JFileChooser();
+		
 		fileChooser.setDialogTitle("Select an output directory");
 		fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		fileChooser.setAcceptAllFileFilterUsed(false);
@@ -47,6 +50,8 @@ public class SelectFiles {
 			
 		    txt_outputDir.setText(outputDir);
 		}
+		
+		fileChooser = null;
 		
 		return outputDir;
 	}

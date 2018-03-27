@@ -35,6 +35,7 @@ public class ButtonListeners implements ActionListener {
 						   JTextArea txt_files, 
 						   JTextArea txt_consoleLog,
 						   JTextField txt_outputDir){
+		
 		this.btn_browse = btn_browse;
 		this.btn_convert = btn_convert;
 		this.btn_exit = btn_exit;
@@ -73,6 +74,8 @@ public class ButtonListeners implements ActionListener {
 				
 				ip.writeOutput(imagesProcessed, outputDirectory, files, txt_consoleLog);
 				
+				clearMemory(); //setting unused objects to null.
+				
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -83,8 +86,17 @@ public class ButtonListeners implements ActionListener {
 			
 		} else if(obj == btn_chooseDir){
 			outputDirectory = sf.chooseOutputDirectory(txt_outputDir);
-			
+		
 		}
+	}
+	
+	public void clear(){
+		files = null;
+		imagesRaw = null;
+		imagesProcessed = null;
+		outputDirectory = null;
+		ip = null;
+		ios = null;
 	}
 		
 }
