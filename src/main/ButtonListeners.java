@@ -67,6 +67,9 @@ public class ButtonListeners implements ActionListener {
 		} else if(obj == btn_convert){
 			
 			try {
+				for(File f: files){
+					//filter bytes
+				}
 				imagesRaw = ios.filterBytes(files);
 				imagesProcessed = ip.convertBytesToImage(imagesRaw);
 				//output to dir
