@@ -1,11 +1,11 @@
 package main;
 
+import java.awt.Desktop;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JTextArea;
@@ -69,13 +69,11 @@ public class ButtonListeners implements ActionListener {
 					//filter bytes
 					imageRaw = ios.filterBytes(f);
 					imageProcessed = ip.convertBytesToImage(imageRaw);
+					
+					//output to dir
+					ip.writeOutput(imageProcessed, outputDirectory, f, txt_consoleLog);
 				}
-				
-				//output to dir
-				
-				ip.writeOutput(imageProcessed, outputDirectory, files, txt_consoleLog);
-				
-				clearMemory(); //setting unused objects to null.
+				Desktop.getDesktop().open(new File(outputDirectory));
 				
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
@@ -89,15 +87,6 @@ public class ButtonListeners implements ActionListener {
 			outputDirectory = sf.chooseOutputDirectory(txt_outputDir);
 		
 		}
-	}
-	
-	public void clearMemory(){
-		files = null;
-		imagesRaw = null;
-		imagesProcessed = null;
-		outputDirectory = null;
-		ip = null;
-		ios = null;
 	}
 		
 }

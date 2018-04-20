@@ -1,13 +1,11 @@
 package tools;
 
-import java.awt.Desktop;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Iterator;
 
 import javax.imageio.ImageIO;
@@ -34,29 +32,18 @@ public class ImageProcessing {
 		return imageProcessed;
 	} //converts bytes to image 
 	
-	public void writeOutput(ArrayList<Image> imageProcessed, String outputDirectory, File[] files, JTextArea txt_consoleLog) throws IOException{
+	public void writeOutput(Image imageProcessed, String outputDirectory, File file, JTextArea txt_consoleLog) throws IOException{
 		//I should use a hashmap arrayList with File[] maybe.
-		int index = 0;
-		
-		for(Image ip: imageProcessed){
 			
-			//bufferedImage is the RenderedImage to be written
-			BufferedImage bufferedImage = new BufferedImage(ip.getWidth(null), ip.getHeight(null), BufferedImage.TYPE_INT_RGB);
+		//bufferedImage is the RenderedImage to be written
+		BufferedImage bufferedImage = new BufferedImage(imageProcessed.getWidth(null), imageProcessed.getHeight(null), BufferedImage.TYPE_INT_RGB);
 		
-			Graphics2D g2 = bufferedImage.createGraphics();
-			g2.drawImage(ip, null, null);
+		Graphics2D g2 = bufferedImage.createGraphics();
+		g2.drawImage(imageProcessed, null, null);
 			
-		
-			File imageFile = new File(outputDirectory + "\\"+ files[index].getName()+".jpg");
-			ImageIO.write(bufferedImage, "jpg", imageFile);
+		File imageFile = new File(outputDirectory + "/"+ file.getName()+".jpg");
+		ImageIO.write(bufferedImage, "jpg", imageFile);
 			
-			txt_consoleLog.append(imageFile.getPath()+" created.\n");
-			index ++; 
-			bufferedImage = null;
-			g2 = null;
-			imageFile=  null;
-		}
-		
-		Desktop.getDesktop().open(new File(outputDirectory));
+		txt_consoleLog.append(imageFile.getPath()+" created.\n");
 	}
 }

@@ -4,7 +4,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -38,13 +37,7 @@ public class IOStream {
 		buf = bos.toByteArray();
 		buf = wr.removeWrapper(buf);
 		imagesRaw = buf;
-		
-		fis = null;
-		bos = null;
-		buf = null;
-		
-		wr = null;
-		
+	
 		return imagesRaw;
 	}
 }
