@@ -18,30 +18,19 @@ import javax.swing.JTextArea;
 
 public class ImageProcessing {
 	
-	public ArrayList<Image> convertBytesToImage(ArrayList<byte[]> byteArrayOfImagesRaw) throws IOException{
-		
-		ArrayList<Image> imageProcessed = new ArrayList<Image>();
-		
-		for(byte[] ba: byteArrayOfImagesRaw){
-			ByteArrayInputStream bis = new ByteArrayInputStream(ba);
-			Iterator<?> readers = ImageIO.getImageReadersByFormatName("jpg");
+	public Image convertBytesToImage(byte[] byteArrayOfImageRaw) throws IOException{
+	
+		ByteArrayInputStream bis = new ByteArrayInputStream(byteArrayOfImageRaw);
+		Iterator<?> readers = ImageIO.getImageReadersByFormatName("jpg");
 			
-			//encoding and decoding
-	        ImageReader reader = (ImageReader) readers.next();
-	        Object source = bis; 
-	        ImageInputStream iis = ImageIO.createImageInputStream(source); 
-	        reader.setInput(iis, true);
-	        ImageReadParam param = reader.getDefaultReadParam();
-	        Image image = reader.read(0, param); //got an image file
-	        
-	        imageProcessed.add(image);
-	        
-	        reader = null;
-	        source = null;
-	        iis = null;
-	        param = null;
-	        image = null;
-		}
+		//encoding and decoding
+	    ImageReader reader = (ImageReader) readers.next();
+	    Object source = bis; 
+	    ImageInputStream iis = ImageIO.createImageInputStream(source); 
+	    reader.setInput(iis, true);
+	    ImageReadParam param = reader.getDefaultReadParam();
+	    Image imageProcessed = reader.read(0, param); //got an image file
+		
 		return imageProcessed;
 	} //converts bytes to image 
 	

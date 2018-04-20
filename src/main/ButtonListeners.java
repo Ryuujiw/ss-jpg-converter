@@ -24,8 +24,8 @@ public class ButtonListeners implements ActionListener {
 	private SelectFiles sf;
 	private IOStream ios;
 	private ImageProcessing ip = new ImageProcessing();
-	private ArrayList<byte[]> imagesRaw;
-	private ArrayList<Image> imagesProcessed;
+	private byte[] imageRaw;
+	private Image imageProcessed;
 	private String outputDirectory;
 	
 	public ButtonListeners(JButton btn_browse, 
@@ -51,8 +51,6 @@ public class ButtonListeners implements ActionListener {
 		
 		sf = new SelectFiles();
 		ios = new IOStream();
-		imagesRaw = new ArrayList<byte[]>();
-		imagesProcessed = new ArrayList<Image>();
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -69,12 +67,13 @@ public class ButtonListeners implements ActionListener {
 			try {
 				for(File f: files){
 					//filter bytes
+					imageRaw = ios.filterBytes(f);
+					imageProcessed = ip.convertBytesToImage(imageRaw);
 				}
-				imagesRaw = ios.filterBytes(files);
-				imagesProcessed = ip.convertBytesToImage(imagesRaw);
+				
 				//output to dir
 				
-				ip.writeOutput(imagesProcessed, outputDirectory, files, txt_consoleLog);
+				ip.writeOutput(imageProcessed, outputDirectory, files, txt_consoleLog);
 				
 				clearMemory(); //setting unused objects to null.
 				
