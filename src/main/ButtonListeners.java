@@ -55,7 +55,6 @@ public class ButtonListeners implements ActionListener {
 		imagesProcessed = new ArrayList<Image>();
 	}
 
-	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		Object obj = e.getSource();
