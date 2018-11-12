@@ -1,10 +1,18 @@
 # ss-jpg-converter
 
-This program's main purpose is to convert .ss files (FF15 screenshots files) to .jpg image files. 
+This program is for converting SS files (Final Fantasy 15 screenshots files) to the JPG format. 
 
-I will achieve this by first reading the bytes in the individual files. The bytes will be stored in a byte array. 
+SS is a file format introduced in Final Fantasy 15. It is comprised of JPG data being wrapped in some custom header and trailer bits.
 
-And then from the byte array, a line of code will copy the bytes (excluding the ss header and trailer) to a new array. I am also assuming that the wrapper length is always fixed. 
+This program carries out the conversion process by extracting the JPG data out of the SS files. This is achieved by first reading the bytes in the individual SS files. The bytes are then stored in a byte array. The wrapper length for the custom header bits are assumed to be fixed (corresponding to Final Fantasy 15). The data after the custom header bits are then copied into a new array. The bytes are then encoded using the ImageIO class to output JPG image files.
 
-Finally the bytes will be encoded using the ImageIO class and then the output will be a .jpg image file. 
+**Dependencies:**
+* Java Swing (used for program's GUI)
 
+Java Swing is included in all JDK releases from Oracle. This project can be built with just a standard Java JDK.
+
+This project also includes Eclipse setting files for those who want to build in Eclipse directly.
+
+**Steps needed to be taken to use project:**
+1. Build project (optionally: import project into Eclipse and directly Build) with any Java JDK.
+2. Run built JAR.
